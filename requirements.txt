@@ -1,0 +1,4 @@
+flask
+redis
+postgres
+quickfix
