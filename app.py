@@ -1,6 +1,6 @@
 import time
 
-import redis
+#import redis
 from flask import Flask
 import json
 import pandas as pd
@@ -9,14 +9,15 @@ from finvizfinance.quote import finvizfinance
 stock = finvizfinance('tsla')
 
 app = Flask(__name__)
-cache = redis.Redis(host='redis', port=6379)
+#cache = redis.Redis(host='redis', port=6379)
 
 
 def get_hit_count():
     retries = 5
     while True:
         try:
-            return cache.incr('hits')
+            #return cache.incr('hits')
+            return 100
         except redis.exceptions.ConnectionError as exc:
             if retries == 0:
                 raise exc
