@@ -1,5 +1,3 @@
 flask
 redis
-postgres
-quickfix
 finvizfinance
