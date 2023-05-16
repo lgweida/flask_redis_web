@@ -2,7 +2,6 @@ import time
 
 import redis
 from flask import Flask
-import quickfix as qf
 import json
 import pandas as pd
 from finvizfinance.quote import finvizfinance
@@ -26,8 +25,7 @@ def get_hit_count():
 
 @app.route('/')
 def hello():
-#    count = get_hit_count()
-    #print(qf)
-    return 'Hello World! I have been seen {} times. {}\n'.format(count, json.dumps(dir(qf)))
+    count = get_hit_count()
+    return 'Hello World! I have been seen {} times. {}\n'.format(count, "hello World")
     
-    #return json.dumps(dir(qf))
+   
