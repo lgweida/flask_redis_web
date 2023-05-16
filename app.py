@@ -7,6 +7,8 @@ import pandas as pd
 from finvizfinance.quote import finvizfinance
 from finvizfinance.quote import Quote
 from finvizfinance.earnings import Earnings
+from json import loads, dumps
+
 
 stock = finvizfinance('tsla')
 quote = Quote()
@@ -40,4 +42,10 @@ def earnings():
     
     return earnings.to_json()
     
-   
+@app.route('/insider')
+def insider():
+    stock = finvizfinance('nvda')
+    inside_trader_df = stock.ticker_inside_trader()
+    json_str = inside_trader_df.to_json(orient='records', lines=False)
+    json_rec=loads(json_str)
+    return  dumps(json_rec)
