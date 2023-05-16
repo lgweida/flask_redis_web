@@ -5,8 +5,11 @@ from flask import Flask
 import json
 import pandas as pd
 from finvizfinance.quote import finvizfinance
+from finvizfinance.quote import Quote
 
 stock = finvizfinance('tsla')
+quote = Quote()
+q = quote.get_current("tsla");
 
 app = Flask(__name__)
 #cache = redis.Redis(host='redis', port=6379)
