@@ -4,6 +4,10 @@ import redis
 from flask import Flask
 import quickfix as qf
 import json
+import pandas as pd
+from finvizfinance.quote import finvizfinance
+
+stock = finvizfinance('tsla')
 
 app = Flask(__name__)
 #cache = redis.Redis(host='redis', port=6379)
@@ -23,7 +27,7 @@ def get_hit_count():
 @app.route('/')
 def hello():
 #    count = get_hit_count()
-    print(qf)
-    #return 'Hello World! I have been seen {} times. {}\n'.format(count, json.dumps(dir(qf)))
-    return json.dumps(dir(qf))
-
+    #print(qf)
+    return 'Hello World! I have been seen {} times. {}\n'.format(count, json.dumps(dir(qf)))
+    
+    #return json.dumps(dir(qf))
