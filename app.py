@@ -6,6 +6,7 @@ import json
 import pandas as pd
 from finvizfinance.quote import finvizfinance
 from finvizfinance.quote import Quote
+from finvizfinance.earnings import Earnings
 
 stock = finvizfinance('tsla')
 quote = Quote()
@@ -32,5 +33,11 @@ def get_hit_count():
 def hello():
     count = get_hit_count()
     return 'Hello World! I have been seen {} times. {}\n'.format(count, q)
+
+@app.route('/earnings')
+def earnings():
+    earnings = Earnings("This Week")
+    
+    return earnings.to_json()
     
    
