@@ -36,7 +36,7 @@ def hello():
 
 @app.route('/earnings')
 def earnings():
-    earnings = Earnings("This Week")
+    earnings = Earnings()
     
     return earnings.to_json()
     
