@@ -64,7 +64,7 @@ def get_quote():
     return dumps(my_quote)
 
 @app.route('/calendar', methods=['GET'])
-def insider():
+def calendar():
     cal_df = finvizfinance.calendar.Calendar().calendar()
     json_str = cal_df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
