@@ -7,7 +7,7 @@ import pandas as pd
 from finvizfinance.quote import finvizfinance, Quote
 from finvizfinance.quote import Quote
 from finvizfinance.earnings import Earnings
-from finvizfinance.calendar import Calender
+from finvizfinance.calendar import Calendar
 from json import loads, dumps
 
 stock = finvizfinance('tsla')
@@ -66,9 +66,9 @@ def get_quote():
 
 @app.route('/calendar', methods=['GET'])
 def calendar():
-    cal = Calendar()
-    cal_df = cal.calender()
-    json_str = cal_df.to_json(orient='records', lines=False)
+    fcalendar = Calendar()
+    df = fcalendar.calendar()
+    json_str = df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
     return  dumps(json_rec)
 #finvizfinance.calendar.Calendar
