@@ -41,9 +41,11 @@ def earnings():
     
     return earnings.to_json()
     
-@app.route('/insider')
+@app.route('/insider', methods=['GET'])
 def insider():
-    stock = finvizfinance('nvda')
+    args = request.args
+    ticker = args.get('ticker')
+    stock = finvizfinance(ticker)
     inside_trader_df = stock.ticker_inside_trader()
     json_str = inside_trader_df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
@@ -54,5 +56,9 @@ def get_quote():
     args = request.args
     ticker = args.get('ticker')
     q = quote.get_current(ticker);
-
-    return "Ticker {} last price {}\n".format(ticker, q)
+    my_quote ={"ticker": ticker,
+               "price" : q
+              }
+     
+    
+    return dumps(my_quote)
