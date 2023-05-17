@@ -50,7 +50,7 @@ def insider():
     return  dumps(json_rec)
 
 @app.route('/quote', methods=['GET'])
-def quote():
+def get_quote():
     args = request.args
     ticker = args.get('ticker')
     q = quote.get_current(ticker);
