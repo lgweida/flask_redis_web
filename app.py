@@ -6,9 +6,9 @@ import json
 import pandas as pd
 from finvizfinance.quote import finvizfinance, Quote
 from finvizfinance.quote import Quote
-from finvizfinance.earnings import Earnings
 from finvizfinance.calendar import Calendar
 from json import loads, dumps
+from finvizfinance.earnings import Earnings
 
 stock = finvizfinance('tsla')
 quote = Quote()
@@ -38,9 +38,9 @@ def hello():
 
 @app.route('/earnings')
 def earnings():
-    earnings = Earnings()
-    
-    return earnings.to_json()
+    fEarnings = Earnings()
+    df_days = fEarnings.partition_days(mode='financial')
+    return df_days.to_json()
     
 @app.route('/insider', methods=['GET'])
 def insider():
