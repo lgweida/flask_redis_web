@@ -1,14 +1,13 @@
 import time
 
 #import redis
-from flask import Flask
+from flask import Flask, request
 import json
 import pandas as pd
-from finvizfinance.quote import finvizfinance
+from finvizfinance.quote import finvizfinance, Quote
 from finvizfinance.quote import Quote
 from finvizfinance.earnings import Earnings
 from json import loads, dumps
-
 
 stock = finvizfinance('tsla')
 quote = Quote()
@@ -49,3 +48,11 @@ def insider():
     json_str = inside_trader_df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
     return  dumps(json_rec)
+
+@app.route('/quote', methods=['GET'])
+def quote():
+    args = request.args
+    ticker = args.get('ticker')
+    q = quote.get_current(ticker);
+
+    return "Ticker {} last price {}\n".format(ticker, q)
