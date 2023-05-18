@@ -1,7 +1,7 @@
 import time
 
 #import redis
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import json
 import pandas as pd
 from finvizfinance.quote import finvizfinance, Quote
@@ -50,7 +50,7 @@ def insider():
     inside_trader_df = stock.ticker_inside_trader()
     json_str = inside_trader_df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
-    return  dumps(json_rec)
+    return  jsonify(json_rec)
 
 @app.route('/quote', methods=['GET'])
 def get_quote():
@@ -65,7 +65,7 @@ def get_quote():
         status=200,
         mimetype='application/json'
     )
-    return response
+    return jsonify(my_quote)
 
 @app.route('/calendar', methods=['GET'])
 def calendar():
@@ -74,5 +74,5 @@ def calendar():
     json_str = df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
     
-    return  dumps(json_rec)
+    return  jsonify(json_rec)
 #finvizfinance.calendar.Calendar
