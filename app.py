@@ -60,7 +60,7 @@ def get_quote():
     my_quote ={"ticker": ticker,
                "price" : q
               }
-     response = app.response_class(
+    response = app.response_class(
         response=dumps(my_quote),
         status=200,
         mimetype='application/json'
