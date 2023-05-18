@@ -60,9 +60,12 @@ def get_quote():
     my_quote ={"ticker": ticker,
                "price" : q
               }
-     
-    
-    return dumps(my_quote)
+     response = app.response_class(
+        response=dumps(my_quote),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route('/calendar', methods=['GET'])
 def calendar():
@@ -70,5 +73,6 @@ def calendar():
     df = fcalendar.calendar()
     json_str = df.to_json(orient='records', lines=False)
     json_rec=loads(json_str)
+    
     return  dumps(json_rec)
 #finvizfinance.calendar.Calendar
